@@ -1,379 +1,745 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="light">
+<html lang="zh-CN">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>峙 · blog - 幸福像花儿一样</title>
-  <meta name="author" content="峙峙峙">
-  <meta name="copyright" content="峙峙峙">
-  <meta name="format-detection" content="telephone=no">
-  <meta name="theme-color" content="#ffffff">
-  <meta name="description" content="开心快乐stack overflow">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="峙 · blog">
-  <meta property="og:url" content="http://example.com/index.html">
-  <meta property="og:site_name" content="峙 · blog">
-  <meta property="og:description" content="开心快乐stack overflow">
-  <meta property="og:locale" content="zh_CN">
-  <meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
-  <meta property="article:author" content="峙峙峙">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
-  <link rel="shortcut icon" href="/img/favicon.png">
-  <link rel="canonical" href="http://example.com/">
-  <link rel="preconnect" href="//cdn.jsdelivr.net" />
-  <link rel="preconnect" href="//busuanzi.ibruce.info" />
-  <link rel="stylesheet" href="/css/index.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print"
-    onload="this.media='all'">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print"
-    onload="this.media='all'">
-  <script>const GLOBAL_CONFIG = {
-      root: '/',
-      algolia: undefined,
-      localSearch: undefined,
-      translate: undefined,
-      noticeOutdate: undefined,
-      highlight: { "plugin": "highlighjs", "highlightCopy": true, "highlightLang": true, "highlightHeightLimit": false },
-      copy: {
-        success: '复制成功',
-        error: '复制错误',
-        noSupport: '浏览器不支持'
-      },
-      relativeDate: {
-        homepage: false,
-        post: false
-      },
-      runtime: '',
-      date_suffix: {
-        just: '刚刚',
-        min: '分钟前',
-        hour: '小时前',
-        day: '天前',
-        month: '个月前'
-      },
-      copyright: undefined,
-      lightbox: 'fancybox',
-      Snackbar: undefined,
-      source: {
-        justifiedGallery: {
-          js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
-          css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>六一快乐 | 专属礼物</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://kit.fontawesome.com/4df177d487.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Righteous&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF6B9D',
+                        secondary: '#722ED1',
+                        accent: '#FFD166',
+                        dark: '#292F36',
+                        light: '#F7FFF7',
+                        gold: '#FFD700',
+                        silver: '#C0C0C0',
+                    },
+                    fontFamily: {
+                        righteous: ['Righteous', 'cursive'],
+                        poppins: ['Poppins', 'sans-serif'],
+                    },
+                },
+            }
+        };
+        document.addEventListener('DOMContentLoaded', function () {
+            const tiltElement = document.getElementById('tiltElement');
+            const maxTilt = 5; // 最大倾斜角度（度）
+
+            // 鼠标移动事件处理
+            tiltElement.addEventListener('mousemove', function (e) {
+                // 获取元素尺寸和鼠标位置
+                const rect = tiltElement.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                // 计算倾斜角度（基于鼠标在元素中的相对位置）
+                const xPercent = (x / rect.width - 0.5) * 2;
+                const yPercent = (y / rect.height - 0.5) * 2;
+
+                // 计算最终倾斜角度（X轴和Y轴）
+                const tiltX = yPercent * maxTilt;
+                const tiltY = xPercent * maxTilt;
+
+                // 应用变换
+                tiltElement.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+            });
+
+            // 鼠标离开时恢复原状
+            tiltElement.addEventListener('mouseleave', function () {
+                tiltElement.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+            });
+
+            // 响应式调整：根据屏幕宽度调整最大倾斜角度
+            function adjustTiltForScreen() {
+                const screenWidth = window.innerWidth;
+                // 屏幕越宽，倾斜角度越大，增强视觉效果
+                const adjustedMaxTilt = Math.min(maxTilt + (screenWidth > 768 ? (screenWidth - 768) / 200 : 0), 10);
+                maxTilt = adjustedMaxTilt;
+            }
+
+            // 初始化和窗口调整时调用
+            adjustTiltForScreen();
+            window.addEventListener('resize', adjustTiltForScreen);
+        });
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+
+            .text-gradient {
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+            }
+
+            .bg-blur {
+                backdrop-filter: blur(8px);
+            }
+
+            .perspective-1000 {
+                perspective: 1000px;
+            }
+
+            .preserve-3d {
+                transform-style: preserve-3d;
+            }
+
+            .backface-hidden {
+                backface-visibility: hidden;
+            }
+
+            .rotate-y-180 {
+                transform: rotateY(180deg);
+            }
+
+            .transition-transform-3d {
+                transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            }
+
+            .animate-float {
+                animation: float 6s ease-in-out infinite;
+            }
+
+            .animate-float-delay-1 {
+                animation: float 6s ease-in-out 1s infinite;
+            }
+
+            .animate-float-delay-2 {
+                animation: float 6s ease-in-out 0.2s infinite;
+            }
+
+            .animate-float-delay-3 {
+                animation: float 6s ease-in-out 0.5s infinite;
+            }
+
+            .animate-float-fast {
+                animation: float 3s ease-in-out infinite;
+            }
+
+            .animate-float-slow {
+                animation: float 8s ease-in-out infinite;
+            }
+
+            .animate-fade-in {
+                animation: fadeIn 0.8s ease-out forwards;
+            }
+
+            .animate-bounce-slow {
+                animation: bounce 2s infinite;
+            }
+
+            .animate-explode {
+                animation: explode 0.5s ease-out forwards;
+            }
+
+            .animate-scale-in {
+                animation: scaleIn 0.5s ease-out forwards;
+            }
+
+            .animate-slide-up {
+                animation: slideUp 0.8s ease-out forwards;
+            }
+
+            .bg-rainbow {
+                background: linear-gradient(90deg, #FF9FF3, #54A0FF);
+                background-size: 400% 400%;
+                animation: rainbow 6s ease infinite;
+            }
+
+            @keyframes rainbow {
+                0% {
+                    background-position: 0% 50%;
+                }
+
+                50% {
+                    background-position: 100% 50%;
+                }
+
+                100% {
+                    background-position: 0% 50%;
+                }
+            }
         }
-      },
-      isPhotoFigcaption: false,
-      islazyload: false,
-      isAnchor: false
-    }</script>
-  <script id="config-diff">var GLOBAL_CONFIG_SITE = {
-      title: '峙 · blog',
-      isPost: false,
-      isHome: true,
-      isHighlightShrink: false,
-      isToc: false,
-      postUpdate: '2022-11-25 16:24:57'
-    }</script><noscript>
-    <style type="text/css">
-      #nav {
-        opacity: 1
-      }
 
-      .justified-gallery img {
-        opacity: 1
-      }
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(10px) rotate(-2deg);
+            }
+            50% {
+                transform: translateY(-30px) rotate(2deg);
+            }
+        }
 
-      #recent-posts time,
-      #post-meta time {
-        display: inline !important
-      }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes explode {
+            0% {
+                transform: scale(1) rotate(0deg);
+            }
+
+            50% {
+                transform: scale(1.2) rotate(5deg);
+            }
+
+            100% {
+                transform: scale(0) rotate(360deg);
+            }
+        }
+
+        @keyframes scaleIn {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .falling-item {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0;
+            pointer-events: none;
+            will-change: transform, opacity;
+        }
+
+        .firework-particle {
+            position: absolute;
+            border-radius: 50%;
+            will-change: transform, opacity;
+        }
+
+        .gift-lid {
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        .gift-box {
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
     </style>
-  </noscript>
-  <script>(win => {
-                               win.saveToLocal = {
-                                 set: function setWithExpiry(key, value, ttl) {
-                                   if (ttl === 0) return
-                                   const now = new Date()
-                                   const expiryDay = ttl * 86400000
-                                   const item = {
-                                     value: value,
-                                     expiry: now.getTime() + expiryDay,
-                                   }
-                                   localStorage.setItem(key, JSON.stringify(item))
-                                 },
-
-                                 get: function getWithExpiry(key) {
-                                   const itemStr = localStorage.getItem(key)
-
-                                   if (!itemStr) {
-                                     return undefined
-                                   }
-                                   const item = JSON.parse(itemStr)
-                                   const now = new Date()
-
-                                   if (now.getTime() > item.expiry) {
-                                     localStorage.removeItem(key)
-                                     return undefined
-                                   }
-                                   return item.value
-                                 }
-                               }
-
-                               win.getScript = url => new Promise((resolve, reject) => {
-                                 const script = document.createElement('script')
-                                 script.src = url
-                                 script.async = true
-                                 script.onerror = reject
-                                 script.onload = script.onreadystatechange = function () {
-                                   const loadState = this.readyState
-                                   if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-                                   script.onload = script.onreadystatechange = null
-                                   resolve()
-                                 }
-                                 document.head.appendChild(script)
-                               })
-
-                               win.activateDarkMode = function () {
-                                 document.documentElement.setAttribute('data-theme', 'dark')
-                                 if (document.querySelector('meta[name="theme-color"]') !== null) {
-                                   document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-                                 }
-                               }
-                               win.activateLightMode = function () {
-                                 document.documentElement.setAttribute('data-theme', 'light')
-                                 if (document.querySelector('meta[name="theme-color"]') !== null) {
-                                   document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-                                 }
-                               }
-                               const t = saveToLocal.get('theme')
-
-                               if (t === 'dark') activateDarkMode()
-                               else if (t === 'light') activateLightMode()
-
-                               const asideStatus = saveToLocal.get('aside-status')
-                               if (asideStatus !== undefined) {
-                                 if (asideStatus === 'hide') {
-                                   document.documentElement.classList.add('hide-aside')
-                                 } else {
-                                   document.documentElement.classList.remove('hide-aside')
-                                 }
-                               }
-
-                               const detectApple = () => {
-                                 if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
-                                   document.documentElement.classList.add('apple')
-                                 }
-                               }
-                               detectApple()
-                             })(window)</script>
-  <meta name="generator" content="Hexo 6.3.0">
 </head>
 
-<body>
-  <div id="sidebar">
-    <div id="menu-mask"></div>
-    <div id="sidebar-menus">
-      <div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"
-          onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar" /></div>
-      <div class="sidebar-site-data site-data is-center"><a href="/archives/">
-          <div class="headline">文章</div>
-          <div class="length-num">2</div>
-        </a><a href="/tags/">
-          <div class="headline">标签</div>
-          <div class="length-num">0</div>
-        </a><a href="/categories/">
-          <div class="headline">分类</div>
-          <div class="length-num">0</div>
-        </a></div>
-      <hr />
+<body class="min-h-screen bg-gradient-to-br from-pink-300 via-purple-300 to-indigo-400 overflow-hidden font-poppins">
+    <!-- 背景粒子效果 -->
+    <div id="particles-js" class="fixed inset-0 z-0 bg-rainbow"></div>
+
+    <!-- 装饰浮动元素 -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-10 left-10 animate-float-fast text-pink-500 opacity-60">
+            <i class="fa fa-heart text-4xl"></i>
+        </div>
+        <div class="absolute top-20 right-20 animate-float-delay-1 text-yellow-400 opacity-70">
+            <i class="fa fa-camera text-4xl"></i>
+        </div>
+        <div class="absolute bottom-20 left-20 animate-float-delay-2 text-[#ffc800] opacity-50">
+            <i class="fa fa-burger text-4xl"></i>
+        </div>
+        <div class="absolute bottom-10 right-10 animate-float-delay-3 text-red-400 opacity-40">
+            <i class="fa fa-heart text-4xl"></i>
+        </div>
+        <div class="absolute top-[200px] left-40 animate-float-fast text-[#FFCCD5] opacity-60">
+            <i class="fa fa-camera-retro text-6xl"></i>
+        </div>
+        <div class="absolute bottom-20 right-[230px] animate-float-delay-2 text-[#8A7EB5] opacity-50">
+            <i class="fa fa-camera-retro text-6xl"></i>
+        </div>
+
+        <div class="absolute top-[250px] right-[230px] text-white animate-float-delay-2 opacity-50">
+            <i class="fa-solid fa-dog fa-bounce text-5xl"></i>
+        </div>
+
+        <div class="absolute bottom-[340px] right-[70px] animate-float-delay-2 text-[#312712] opacity-50">
+            <i class="fa fa-otter text-5xl"></i>
+        </div>
+        <div class="absolute bottom-[360px] left-[80px] animate-float-delay-3 text-[#FFD43B] opacity-50">
+            <i class="fa fa-cookie text-5xl"></i>
+        </div>
+        <div class="absolute bottom-[250px] left-[230px] animate-float-delay-1 text-[#63E6BE] opacity-50">
+            <i class="fa fa-paw text-5xl"></i>
+        </div>
+
+
     </div>
-  </div>
-  <div class="page" id="body-wrap">
-    <header class="full_page" id="page-header" style="background-image: url('/img/bg_img.jpg')">
-      <nav id="nav"><span id="blog_name"><a id="site-name" href="/">峙 · blog</a></span>
-        <div id="menus">
-          <div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div>
-        </div>
-      </nav>
-      <div id="site-info">
-        <h1 id="site-title">峙 · blog</h1>
-        <div id="site-subtitle"><span id="subtitle"></span></div>
-      </div>
-      <div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div>
-    </header>
-    <main class="layout" id="content-inner">
-      <div class="recent-posts" id="recent-posts">
-        <div class="recent-post-item">
-          <div class="post_cover left"><a href="/2022/11/19/About-me/" title="双创作业"><img class="post_bg"
-                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                onerror="this.onerror=null;this.src='/img/404.jpg'" alt="双创作业"></a></div>
-          <div class="recent-post-info"><a class="article-title" href="/2022/11/19/About-me/" title="双创作业">双创作业</a>
-            <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span
-                  class="article-meta-label">发表于</span><time datetime="2022-11-19T04:48:36.000Z"
-                  title="发表于 2022-11-19 12:48:36">2022-11-19</time></span></div>
-            <div class="content">#简介
-              双创作业：刘峙岩 2022211185 7班
-            </div>
-          </div>
-        </div>
-        <div class="recent-post-item">
-          <div class="post_cover right"><a href="/2022/11/19/hello-world/" title="Hello World"><img class="post_bg"
-                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"></a></div>
-          <div class="recent-post-info"><a class="article-title" href="/2022/11/19/hello-world/"
-              title="Hello World">Hello World</a>
-            <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span
-                  class="article-meta-label">发表于</span><time datetime="2022-11-19T00:57:32.499Z"
-                  title="发表于 2022-11-19 08:57:32">2022-11-19</time></span></div>
-            <div class="content">Welcome to Hexo! This is your very first post. Check documentation for more info. If
-              you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on
-              GitHub.
-              Quick StartCreate a new post1$ hexo new &quot;My New Post&quot;
 
-              More info: Writing
-              Run server1$ hexo server
+    <div class="relative z-10 min-h-screen flex flex-col items-center justify-center p-4">
+        <!-- 标题 -->
+        <h1
+            class="text-[clamp(2rem,5vw,3.5rem)] font-righteous bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600 mb-8 text-center animate-float rounded-lg">
+            🐮
+            <span class="text-5xl text-blue-400">lzy</span>
+            <span class="text-3xl text-pink-500">to</span>
+            <span class="text-6xl text-purple-600">nby</span>
+            <span class="text-4xl text-yellow-400">6.1.gift</span>
+            🐮
+        </h1>
 
-              More info: Server
-              Generate static files1$ hexo generate
+        <!-- 主内容区 -->
+        <div id="tiltElement"
+            class="max-w-4xl w-full bg-white/20 bg-blur-md rounded-2xl shadow-2xl p-6 md:p-8 relative overflow-hidden">
+            <!-- 装饰元素 -->
+            <div class="absolute -top-10 -right-10 w-32 h-32 bg-accent/20 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-primary/20 rounded-full blur-3xl"></div>
 
-              More info: Generating
-              Deploy to remote sites1$ hexo deploy
+            <!-- 说明文字 -->
+            <p
+                class="text-center text-[#f5f5dc] font-bold mb-8 text-xl md:text-2xl max-w-2xl mx-auto animate-fade-in font-righteous">
+                🌈 愿你永远保持童心，每一天都充满甜蜜与惊喜～ 🎉
+            </p>
 
-              More info: Deployment
-            </div>
-          </div>
-        </div>
-        <nav id="pagination">
-          <div class="pagination"><span class="page-number current">1</span></div>
-        </nav>
-      </div>
-      <div class="aside-content" id="aside-content">
-        <div class="card-widget card-info">
-          <div class="is-center">
-            <div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"
-                onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar" /></div>
-            <div class="author-info__name">峙峙峙</div>
-            <div class="author-info__description">开心快乐stack overflow</div>
-          </div>
-          <div class="card-info-data site-data is-center"><a href="/archives/">
-              <div class="headline">文章</div>
-              <div class="length-num">2</div>
-            </a><a href="/tags/">
-              <div class="headline">标签</div>
-              <div class="length-num">0</div>
-            </a><a href="/categories/">
-              <div class="headline">分类</div>
-              <div class="length-num">0</div>
-            </a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i
-              class="fab fa-github"></i><span>Follow Me</span></a>
-        </div>
-        <div class="card-widget card-announcement">
-          <div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div>
-          <div class="announcement_content">之前登在这里的网站移到了gitee上： http://funny-mr-zhi.gitee.io/funny-mr-zhi.gitee.io</div>
-        </div>
-        <div class="sticky_layout">
-          <div class="card-widget card-recent-post">
-            <div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div>
-            <div class="aside-list">
-              <div class="aside-list-item"><a class="thumbnail" href="/2022/11/19/About-me/" title="双创作业"><img
-                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                    onerror="this.onerror=null;this.src='/img/404.jpg'" alt="双创作业" /></a>
-                <div class="content"><a class="title" href="/2022/11/19/About-me/" title="双创作业">双创作业</a><time
-                    datetime="2022-11-19T04:48:36.000Z" title="发表于 2022-11-19 12:48:36">2022-11-19</time></div>
-              </div>
-              <div class="aside-list-item"><a class="thumbnail" href="/2022/11/19/hello-world/" title="Hello World"><img
-                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                    onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World" /></a>
-                <div class="content"><a class="title" href="/2022/11/19/hello-world/" title="Hello World">Hello
-                    World</a><time datetime="2022-11-19T00:57:32.499Z" title="发表于 2022-11-19 08:57:32">2022-11-19</time>
+            <!-- 礼盒容器 -->
+            <div class="perspective-1000 py-12">
+                <div id="gift-container" class="relative w-full max-w-md mx-auto">
+                    <!-- 礼盒 -->
+                    <div id="gift-box" class="gift-box relative w-64 h-48 mx-auto">
+                        <!-- 礼盒主体 -->
+                        <div
+                            class="w-full h-full bg-gradient-to-br from-red-500 to-red-600 rounded-xl shadow-2xl relative">
+                            <!-- 礼盒花纹 -->
+                            <div
+                                class="absolute inset-0 bg-gradient-to-br from-red-400 to-red-700 rounded-xl opacity-80">
+                            </div>
+                            <div class="absolute top-1/2 left-0 right-0 h-8 bg-yellow-400 transform -translate-y-1/2">
+                            </div>
+                            <div class="absolute top-0 bottom-0 left-1/2 w-8 bg-yellow-400 transform -translate-x-1/2">
+                            </div>
+
+                            <!-- 礼盒盖子 -->
+                            <div id="gift-lid"
+                                class="gift-lid absolute -top-4 left-0 right-0 h-12 bg-gradient-to-br from-red-600 to-red-700 rounded-lg shadow-lg">
+                                <div
+                                    class="absolute top-1/2 left-1/2 w-12 h-6 bg-yellow-400 transform -translate-x-1/2 -translate-y-1/2 rounded-full">
+                                </div>
+                            </div>
+
+                            <!-- 礼盒蝴蝶结 -->
+                            <div id="gift-bow" class="absolute -top left-1/2 transform -translate-x-1/2">
+                                <div class="w-16 h-8 bg-yellow-400 rounded-full relative">
+                                    <div
+                                        class="absolute top-1/2 left-1/2 w-4 h-6 bg-yellow-500 transform -translate-x-1/2 -translate-y-1/2 rounded-full">
+                                    </div>
+                                    <!-- 添加蝴蝶结的装饰 -->
+                                    <div
+                                        class="absolute top-0 left-0 w-8 h-8 bg-yellow-400 rounded-full transform -translate-x-1/2 -translate-y-1/2 rotate-45">
+                                    </div>
+                                    <div
+                                        class="absolute top-0 right-0 w-8 h-8 bg-yellow-400 rounded-full transform translate-x-1/2 -translate-y-1/2 -rotate-45">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
                 </div>
-              </div>
+                <!-- 牛爷爷角色 -->
+                <div id="character"
+                    class="absolute bottom-0 left-0 transform -translate-x-1/2 -translate-y-full opacity-0">
+                    <div class="text-8xl animate-bounce-slow text-amber-500">🐮</div>
+                </div>
             </div>
-          </div>
-          <div class="card-widget card-archives">
-            <div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div>
-            <ul class="card-archive-list">
-              <li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/11/"><span
-                    class="card-archive-list-date">十一月 2022</span><span class="card-archive-list-count">2</span></a>
-              </li>
-            </ul>
-          </div>
-          <div class="card-widget card-webinfo">
-            <div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div>
-            <div class="webinfo">
-              <div class="webinfo-item">
-                <div class="item-name">文章数目 :</div>
-                <div class="item-count">2</div>
-              </div>
-              <div class="webinfo-item">
-                <div class="item-name">本站访客数 :</div>
-                <div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div>
-              </div>
-              <div class="webinfo-item">
-                <div class="item-name">本站总访问量 :</div>
-                <div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div>
-              </div>
-              <div class="webinfo-item">
-                <div class="item-name">最后更新时间 :</div>
-                <div class="item-count" id="last-push-date" data-lastPushDate="2022-11-25T08:24:57.862Z"><i
-                    class="fa-solid fa-spinner fa-spin"></i></div>
-              </div>
+
+            <!-- 打开按钮 -->
+            <div class="text-center mt-8 animate-fade-in">
+                <button id="open-btn"
+                    class="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white font-bold py-4 px-8 rounded-full text-lg shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center mx-auto">
+                    <i class="fa fa-gift mr-2"></i> 打开礼物
+                </button>
             </div>
-          </div>
+
+            <!-- 祝福消息 -->
+            <div id="message" class="mt-12 text-center hidden">
+                <h2
+                    class="text-[clamp(2rem,4vw,3rem)] font-righteous text-transparent bg-gradient-to-r from-yellow-400 to-accent mb-4 animate-fade-in">
+                    六一快乐！
+                </h2>
+                <p class="text-white/90 text-xl max-w-2xl mx-auto mb-6 animate-fade-in">
+                    愿你永远保持童心，每一天都充满甜蜜与惊喜～
+                </p>
+                <div class="animate-fade-in">
+                    <audio id="greeting-audio" controls loop>
+                        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+                        您的浏览器不支持音频播放。
+                    </audio>
+                </div>
+            </div>
         </div>
-      </div>
-    </main>
-    <footer id="footer">
-      <div id="footer-wrap">
-        <div class="copyright">&copy;2020 - 2022 By 峙峙峙</div>
-        <div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener"
-            href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank"
-            rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div>
-      </div>
-    </footer>
-  </div>
-  <div id="rightside">
-    <div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i
-          class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i
-          class="fas fa-arrows-alt-h"></i></button></div>
-    <div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i
-          class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i
-          class="fas fa-arrow-up"></i></button></div>
-  </div>
-  <div>
-    <script src="/js/utils.js"></script>
-    <script src="/js/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script>
-    <div class="js-pjax">
-      <script>function subtitleType() {
-          if (true) {
-            window.typed = new Typed("#subtitle", {
-              strings: ["浅浅喜，静静爱 深深懂得，淡淡释怀", "幸福像花儿一样"],
-              startDelay: 300,
-              typeSpeed: 150,
-              loop: true,
-              backSpeed: 50
-            })
-          } else {
-            document.getElementById("subtitle").innerHTML = '浅浅喜，静静爱 深深懂得，淡淡释怀'
-          }
+
+        <!-- 页脚 -->
+        <p class="mt-8 text-white/60 text-sm animate-fade-in">
+            --lzy ❤️ 25.6.1
+        </p>
+    </div>
+
+    <!-- 画布用于烟花效果 -->
+    <canvas id="fireworks-canvas" class="fixed inset-0 pointer-events-none z-20"></canvas>
+
+    <script>
+        // 初始化粒子背景
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 60, density: { enable: true, value_area: 800 } }, // 设置粒子数量和密度
+                color: { value: "#FF6B9D" }, // 粒子的颜色
+                shape: { type: "circle" }, // 粒子的形状
+                opacity: { value: 0.6, random: true }, // 粒子的透明度
+                size: { value: 2, random: true }, // 粒子的大小
+                line_linked: {
+                    enable: true, // 是否启用粒子之间的连线
+                    distance: 150, // 连线的最大距离
+                    color: "#FF6B9D", // 连线的颜色
+                    opacity: 0.15, // 连线的透明度
+                    width: 1 // 连线的宽度
+                },
+                move: {
+                    enable: true, // 是否启用粒子的移动
+                    speed: 1, // 粒子的移动速度
+                    direction: "none", // 粒子的移动方向
+                    random: true, // 是否随机移动
+                    straight: false, // 是否直线移动
+                    out_mode: "out", // 粒子移出画布的模式
+                    bounce: false // 是否启用粒子的弹跳
+                }
+            },
+            interactivity: {
+                detect_on: "canvas", // 交互检测的目标
+                events: {
+                    onhover: { enable: true, mode: "grab" }, // 鼠标悬停时的交互模式
+                    onclick: { enable: true, mode: "push" }, // 鼠标点击时的交互模式
+                    resize: true // 是否在窗口大小变化时重新调整
+                },
+                modes: {
+                    grab: { distance: 140, line_linked: { opacity: 0.5 } }, // 鼠标抓取模式的配置
+                    push: { particles_nb: 3 } // 鼠标点击时生成的粒子数量
+                }
+            },
+            retina_detect: true // 是否启用视网膜屏幕检测
+        });
+
+        // 糖果和玩具表情符号
+        const candyEmojis = ["🍭", "🍬", "🧁", "🍪", "🍩", "🎂", "🍰", "🍫"]; // 糖果表情符号数组
+        const toyEmojis = ["🧸", "🎈", "🎁", "🎀", "🎪", "🎨", "🎯", "🐮"]; // 玩具表情符号数组
+        const allEmojis = [...candyEmojis, ...toyEmojis]; // 合并所有表情符号
+
+        // DOM元素
+        const giftBox = document.getElementById('gift-box'); // 礼盒元素
+        const giftLid = document.getElementById('gift-lid'); // 礼盒盖子元素
+        const giftBow = document.getElementById('gift-bow'); // 礼盒蝴蝶结元素
+        const character = document.getElementById('character'); // 牛爷爷角色元素
+        const openBtn = document.getElementById('open-btn'); // 打开按钮元素
+        const message = document.getElementById('message'); // 祝福消息元素
+        const fireworksCanvas = document.getElementById('fireworks-canvas'); // 烟花画布元素
+        const greetingAudio = document.getElementById('greeting-audio'); // 祝福音频元素
+
+        // 下落物品数组
+        let fallingItems = []; // 存储下落物品的数组
+
+        // 烟花数组
+        let fireworks = []; // 存储烟花的数组
+
+        // 动画请求ID
+        let animationFrameId = null; // 动画帧的ID
+        let isOpened = false; // 礼物是否已打开的标志
+
+        // 初始化画布
+        function initCanvas() {
+            fireworksCanvas.width = window.innerWidth; // 设置画布宽度为窗口宽度
+            fireworksCanvas.height = window.innerHeight; // 设置画布高度为窗口高度
         }
 
-        if (true) {
-          if (typeof Typed === 'function') {
-            subtitleType()
-          } else {
-            getScript('https://cdn.jsdelivr.net/npm/typed.js/lib/typed.min.js').then(subtitleType)
-          }
-        } else {
-          subtitleType()
-        }</script>
-    </div>
-    <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  </div>
-  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script>
-  <script>L2Dwidget.init({ "pluginModelPath": "assets/", "model": { "jsonPath": "/live2dw/assets/shizuku.model.json" }, "display": { "position": "left", "width": 200, "height": 400 }, "mobile": { "show": false }, "rect": "opacity:0.7", "log": false, "pluginJsPath": "lib/", "pluginRootPath": "live2dw/", "tagMode": false });</script>
+        // 创建下落物品
+        function createFallingItems() {
+            const containerWidth = fireworksCanvas.width; // 获取画布宽度
+            const containerHeight = fireworksCanvas.height; // 获取画布高度
+
+            for (let i = 0; i < 50; i++) { // 循环创建40个下落物品
+                setTimeout(() => {
+                    const emoji = allEmojis[Math.floor(Math.random() * allEmojis.length)]; // 随机选择一个表情符号
+                    const element = document.createElement('div'); // 创建一个div元素
+                    element.className = 'falling-item'; // 设置元素的类名
+                    element.textContent = emoji; // 设置元素的内容为表情符号
+
+                    // 随机大小
+                    const size = 24 + Math.random() * 24; // 随机生成大小
+                    element.style.fontSize = `${size}px`; // 设置字体大小
+                    element.style.zIndex = '30'; // 确保物品显示在屏幕顶层
+
+                    // 添加到画布
+                    document.body.appendChild(element); // 将元素添加到页面中
+
+                    const canvasRect = fireworksCanvas.getBoundingClientRect(); // 获取画布的位置信息
+                    const giftBoxRect = giftBox.getBoundingClientRect(); // 获取礼盒的位置信息
+
+                    const item = {
+                        id: i, // 物品的ID
+                        x: giftBoxRect.left - canvasRect.left + giftBoxRect.width / 2 + (Math.random() - 0.5) * 5, // 初始x位置在礼盒中心附近
+                        y: (giftBoxRect.top + giftBoxRect.height / 10) - canvasRect.bottom, // 初始y位置在礼盒顶部附近
+                        vx: (Math.random() - 0.5) * 30, // x方向速度
+                        vy: -Math.random() * 15 - 10, // y方向速度
+                        rotation: 0, // 初始旋转角度
+                        rotationSpeed: (Math.random() - 0.5) * 10, // 旋转速度
+                        emoji, // 表情符号
+                        element, // DOM元素
+                        settled: false // 是否已稳定
+                    };
+
+                    // 显示物品
+                    setTimeout(() => {
+                        element.style.opacity = '1'; // 设置透明度为1
+                    }, 50);
+
+                    if (item.id == 0) {
+                        console.log('礼盒位置:', giftBoxRect); // 调试礼盒的位置信息
+                        console.log('物品初始位置:', item.x, item.y + canvasRect.bottom); // 调试物品的初始位置
+                        console.log('画布位置:', canvasRect); // 调试画布的位置信息
+                        console.log('画布宽-高度:', containerWidth, containerHeight); // 调试画布高度
+                    }
+
+
+                    fallingItems.push(item); // 将物品添加到数组中
+                }, i * 50); // 每隔50ms创建一个物品
+            }
+        }
+
+        // 创建烟花
+        function createFirework(x, y) {
+            const colors = ['#FF6B9D', '#722ED1', '#FFD166', '#4ECDC4', '#96CEB4', '#FF9FF3', '#54A0FF']; // 烟花的颜色数组
+            const particles = []; // 存储烟花粒子的数组
+
+            for (let i = 0; i < 100; i++) { // 循环创建50个粒子
+                const angle = (Math.PI * 2 * i) / 50; // 计算粒子的角度
+                const speed = Math.random() * 5 + 2; // 随机生成粒子的速度
+
+                const particle = {
+                    x, // 粒子的初始x位置
+                    y, // 粒子的初始y位置
+                    vx: Math.cos(angle) * speed, // x方向速度
+                    vy: Math.sin(angle) * speed, // y方向速度
+                    life: 80, // 粒子的生命周期
+                    maxLife: 80, // 粒子的最大生命周期
+                    color: colors[Math.floor(Math.random() * colors.length)], // 随机选择颜色
+                    size: Math.random() * 3 + 5, // 随机生成粒子大小
+                    element: null // 粒子的DOM元素
+                };
+
+                // 创建粒子元素
+                const element = document.createElement('div'); // 创建一个div元素
+                element.className = 'firework-particle'; // 设置类名
+                element.style.backgroundColor = particle.color; // 设置背景颜色
+                element.style.width = `${particle.size}px`; // 设置宽度
+                element.style.height = `${particle.size}px`; // 设置高度
+                element.style.position = 'absolute'; // 设置为绝对定位
+                element.style.left = `${x}px`; // 设置初始x位置
+                element.style.top = `${y}px`; // 设置初始y位置
+                element.style.opacity = '1'; // 设置透明度
+
+                document.body.appendChild(element); // 将粒子元素添加到页面中
+                particle.element = element; // 将元素与粒子对象关联
+
+                particles.push(particle); // 将粒子添加到数组中
+            }
+
+            fireworks.push({
+                id: Date.now() + Math.random(), // 唯一ID
+                particles // 粒子数组
+            });
+        }
+
+        // 更新下落物品
+        function updateFallingItems() {
+            const containerHeight = fireworksCanvas.height - 50; // 获取画布高度
+            const containerWidth = fireworksCanvas.width - 50; // 获取画布宽度
+            const canvasRect = fireworksCanvas.getBoundingClientRect(); // 获取画布的位置信息
+
+            fallingItems.forEach(item => {
+                if (item.settled) return; // 如果物品已稳定，跳过更新
+
+                // 更新位置和旋转
+                item.y += item.vy; // 更新y位置
+                item.x += item.vx; // 更新x位置
+                item.rotation += item.rotationSpeed; // 更新旋转角度
+                item.vy += 0.5; // 模拟重力
+                item.vx *= 0.99; // 模拟空气阻力
+
+                // 地面碰撞
+                if (item.y + canvasRect.bottom >= containerHeight && item.vy >= 0) { // 如果物品接触地面
+                    item.y = containerHeight - canvasRect.bottom; // 设置y位置为地面
+                    item.vy = -item.vy * 0.6; // 模拟反弹
+                    // item.vy = -item.vy * 0; // 模拟反弹
+                    item.vx *= 0.8; // 减小x方向速度
+
+                    // 如果速度很小，标记为已稳定
+                    if (Math.abs(item.vy) < 2) {
+                        item.settled = true;
+                    }
+                }
+
+                // 窗口左右碰撞
+                if ((item.x <= 0 && item.vx < 0) || (item.x + canvasRect.left >= containerWidth && item.vx > 0)) { // 如果物品接触左右边界
+                    item.vx = -item.vx * 0.6; // 模拟反弹
+                    item.x = item.x <= 0 ? 0 : containerWidth - canvasRect.left; // 限制x位置在边界内
+                }
+
+                if (item.id == 0) {
+                    console.log('物品运动反弹条件', item.y + canvasRect.bottom, containerHeight, item.vy); // 调试物品的初始位置
+                }
+
+                // 更新元素样式
+                item.element.style.transform = `translate(${item.x}px, ${item.y}px) rotate(${item.rotation}deg)`; // 更新位置和旋转
+            });
+        }
+
+        // 更新烟花
+        function updateFireworks() {
+            fireworks.forEach(firework => {
+                firework.particles.forEach(particle => {
+                    // 更新位置
+                    particle.x += particle.vx; // 更新x位置
+                    particle.y += particle.vy; // 更新y位置
+                    particle.vy += 0.1; // 模拟重力
+                    particle.life -= 1; // 减少生命周期
+
+                    // 更新元素样式
+                    particle.element.style.left = `${particle.x}px`; // 更新x位置
+                    particle.element.style.top = `${particle.y}px`; // 更新y位置
+                    particle.element.style.opacity = `${particle.life / particle.maxLife}`; // 更新透明度
+                });
+
+                // 移除已消失的粒子
+                firework.particles = firework.particles.filter(particle => particle.life > 0); // 过滤掉生命周期为0的粒子
+
+                // 移除没有粒子的烟花
+                if (firework.particles.length === 0) {
+                    fireworks = fireworks.filter(f => f.id !== firework.id); // 从数组中移除烟花
+                }
+            });
+        }
+
+        // 动画循环
+        function animate() {
+            updateFallingItems(); // 更新下落物品
+            updateFireworks(); // 更新烟花
+            animationFrameId = requestAnimationFrame(animate); // 请求下一帧动画
+        }
+
+        // 打开礼物
+        function openGift() {
+            if (isOpened) return; // 如果已打开，直接返回
+            isOpened = true; // 标记为已打开
+
+            // 禁用按钮
+            openBtn.disabled = true; // 禁用按钮
+            openBtn.classList.add('opacity-50'); // 添加透明度样式
+
+            // 蝴蝶结消失
+            setTimeout(() => {
+                giftBow.style.animation = 'explode 0.5s ease-out forwards'; // 播放蝴蝶结消失动画
+            }, 10);
+
+            // 播放礼盒打开动画
+            giftLid.style.transform = 'translateY(-400px) translateX(-200px) rotate(-45deg)'; // 移动和旋转礼盒盖子
+            giftBox.style.transform = 'scale(1.05)'; // 放大礼盒
+
+            // 创建下落物品
+            setTimeout(createFallingItems, 500); // 延迟500ms创建下落物品
+
+            // 创建多个烟花
+            setTimeout(() => {
+                for (let i = 0; i < 6; i++) { // 循环创建6个烟花
+                    setTimeout(() => {
+                        const x = Math.random() * window.innerWidth; // 随机x位置
+                        const y = Math.random() * window.innerHeight * 0.6; // 随机y位置
+                        createFirework(x, y); // 创建烟花
+                    }, i * 300); // 每隔300ms创建一个烟花
+                }
+            }, 1000); // 延迟1000ms开始创建烟花
+
+            // // 显示角色
+            // setTimeout(() => {
+            //     character.style.opacity = '1'; // 设置角色透明度为1
+            //     character.style.animation = 'scaleIn 0.8s ease-out forwards'; // 播放角色出现动画
+            // }, 3000); // 延迟3000ms显示角色
+
+            // 显示消息
+            setTimeout(() => {
+                // message.classList.remove('hidden'); // 显示祝福消息
+                // 播放祝福音频
+                greetingAudio.play().catch(e => console.log("音频播放需要用户交互:", e)); // 播放音频并捕获错误
+            }, 4000); // 延迟4000ms显示消息
+
+            // 开始动画循环
+            if (!animationFrameId) {
+                animate(); // 开始动画
+            }
+        }
+
+        // 窗口大小变化时重新初始化画布
+        window.addEventListener('resize', initCanvas); // 监听窗口大小变化事件
+
+        // 初始化画布
+        initCanvas(); // 初始化画布
+
+        // 绑定打开按钮事件
+        openBtn.addEventListener('click', openGift); // 为按钮绑定点击事件
+
+        // 点击页面创建烟花
+        document.addEventListener('click', (e) => {
+            if (e.target === openBtn) return; // 如果点击的是按钮，直接返回
+
+            createFirework(e.clientX, e.clientY); // 在点击位置创建烟花
+        });
+    </script>
 </body>
 
 </html>
