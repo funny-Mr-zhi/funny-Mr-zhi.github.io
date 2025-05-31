@@ -269,6 +269,17 @@
             transition: all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
         }
     </style>
+
+    <style>
+        #music_list {
+            display: flex;
+            /* 使用Flex布局方案 */
+            align-items: center;
+            /* 或使用绝对定位方案：
+            position: relative;
+            */
+        }
+    </style>
 </head>
 
 <body class="min-h-screen bg-gradient-to-br from-pink-300 via-purple-300 to-indigo-400 overflow-hidden font-poppins">
@@ -362,7 +373,6 @@
                                     class="absolute top-1/2 left-1/2 w-12 h-6 bg-yellow-400 transform -translate-x-1/2 -translate-y-1/2 rounded-full">
                                 </div>
                             </div>
-
                             <!-- 礼盒蝴蝶结 -->
                             <div id="gift-bow" class="absolute -top left-1/2 transform -translate-x-1/2">
                                 <div class="w-16 h-8 bg-yellow-400 rounded-full relative">
@@ -393,6 +403,17 @@
                 <div id="character"
                     class="absolute bottom-0 left-0 w-24 h-24 transform -translate-x-1/2 -translate-y-full opacity-0">
                     <img src="naicha_cat.png" alt="奶茶猫" class="w-full h-full object-contain animate-bounce-slow">
+                </div>
+                <!-- 音乐播放列表 -->
+                <div id="music_list"
+                    class="absolute top-0 right-[20px] w-58 h-full bg-white/20 bg-blur-md rounded-xl shadow-lg p-4 overflow-hidden opacity-0">
+                    <ul id="music-playlist" class="text-center text-white space-y-5 justify-center">
+                        <li class="text-sm opacity-50">音乐 1</li>
+                        <li class="text-sm opacity-75">音乐 2</li>
+                        <li class="text-lg font-bold">当前音乐</li>
+                        <li class="text-sm opacity-75">音乐 4</li>
+                        <li class="text-sm opacity-50">音乐 5</li>
+                    </ul>
                 </div>
             </div>
 
@@ -438,8 +459,9 @@
                         <i class="fa fa-step-forward"></i>
                     </button>
                 </div>
-                <div class="progress-bar mt-4">
-                    <input id="progress" type="range" min="0" max="100" value="0" class="w-full">
+                <div class="progress-bar mt-4 relative">
+                    <input id="progress" type="range" min="0" max="100" value="0" class="w-full"
+                        style="accent-color: #adf7a6;">
                 </div>
             </div>
         </div>
@@ -504,6 +526,7 @@
         const giftLid = document.getElementById('gift-lid'); // 礼盒盖子元素
         const giftBow = document.getElementById('gift-bow'); // 礼盒蝴蝶结元素
         const character = document.getElementById('character'); // 牛爷爷角色元素
+        const music_list = document.getElementById('music_list')
         const openBtn = document.getElementById('open-btn'); // 打开按钮元素
         const message = document.getElementById('message'); // 祝福消息元素
         const fireworksCanvas = document.getElementById('fireworks-canvas'); // 烟花画布元素
@@ -566,12 +589,12 @@
                         element.style.opacity = '1'; // 设置透明度为1
                     }, 50);
 
-                    if (item.id == 0) {
-                        console.log('礼盒位置:', giftBoxRect); // 调试礼盒的位置信息
-                        console.log('物品初始位置:', item.x, item.y + canvasRect.bottom); // 调试物品的初始位置
-                        console.log('画布位置:', canvasRect); // 调试画布的位置信息
-                        console.log('画布宽-高度:', containerWidth, containerHeight); // 调试画布高度
-                    }
+                    // if (item.id == 0) {
+                    //     console.log('礼盒位置:', giftBoxRect); // 调试礼盒的位置信息
+                    //     console.log('物品初始位置:', item.x, item.y + canvasRect.bottom); // 调试物品的初始位置
+                    //     console.log('画布位置:', canvasRect); // 调试画布的位置信息
+                    //     console.log('画布宽-高度:', containerWidth, containerHeight); // 调试画布高度
+                    // }
 
 
                     fallingItems.push(item); // 将物品添加到数组中
@@ -659,7 +682,7 @@
                 }
 
                 if (item.id == 0) {
-                    console.log('物品运动反弹条件', item.y + canvasRect.bottom, containerHeight, item.vy); // 调试物品的初始位置
+                    // console.log('物品运动反弹条件', item.y + canvasRect.bottom, containerHeight, item.vy); // 调试物品的初始位置
                 }
 
                 // 更新元素样式
@@ -736,6 +759,8 @@
             setTimeout(() => {
                 character.style.opacity = '1'; // 设置角色透明度为1
                 character.style.animation = 'scaleIn 0.8s ease-out forwards'; // 播放角色出现动画
+                music_list.style.opacity = '1'; //音乐列表显示
+                music_list.style.animation = 'scaleIn 0.8s ease-out forwards'; // 播放角色出现动画
             }, 3000); // 延迟3000ms显示角色
 
             // 显示消息
@@ -811,12 +836,37 @@
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
         const progress = document.getElementById('progress');
+        const musicPlaylist = document.getElementById('music-playlist');
+
+        function updatePlaylistDisplay() {
+            const playlistItems = [];
+            const total = musicList.length;
+
+            playlistItems.push(`<li class='text-lg font-bold'>-------------------</li>`);
+            for (let i = -2; i <= 2; i++) {
+                const index = (currentMusicIndex + i + total) % total;
+                if (i === 0) {
+                    playlistItems.push(`<li class='text-lg font-bold'>${musicList[index].name}</li>`);
+                } else if (i === -1 || i === 1) {
+                    playlistItems.push(`<li class='text-sm opacity-75'>${musicList[index].name}</li>`);
+                } else {
+                    playlistItems.push(`<li class='text-sm opacity-50'>${musicList[index].name}</li>`);
+                }
+            }
+            playlistItems.push(`<li class='text-lg font-bold'>----------------</li>`);
+
+            musicPlaylist.innerHTML = playlistItems.join('');
+        }
 
         function loadMusic(index) {
             audio.src = musicList[index].path;
             musicTitle.textContent = musicList[index].name;
             progress.value = 0;
+            updatePlaylistDisplay();
         }
+
+        // Update playlist display initially
+        updatePlaylistDisplay();
 
         function playPauseMusic() {
             if (audio.paused) {
@@ -833,6 +883,7 @@
             loadMusic(currentMusicIndex);
             audio.play();
             playPauseBtn.innerHTML = '<i class="fa fa-pause"></i>';
+            updatePlaylistDisplay();
         }
 
         function nextMusic() {
@@ -840,6 +891,7 @@
             loadMusic(currentMusicIndex);
             audio.play();
             playPauseBtn.innerHTML = '<i class="fa fa-pause"></i>';
+            updatePlaylistDisplay();
         }
 
         audio.addEventListener('timeupdate', () => {
