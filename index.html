@@ -384,10 +384,15 @@
 
 
                 </div>
-                <!-- 牛爷爷角色 -->
+                <!-- 牛爷爷角色
                 <div id="character"
                     class="absolute bottom-0 left-0 transform -translate-x-1/2 -translate-y-full opacity-0">
                     <div class="text-8xl animate-bounce-slow text-amber-500">🐮</div>
+                </div> -->
+                <!-- 奶茶猫图片 -->
+                <div id="character"
+                    class="absolute bottom-0 left-0 w-24 h-24 transform -translate-x-1/2 -translate-y-full opacity-0">
+                    <img src="naicha_cat.png" alt="奶茶猫" class="w-full h-full object-contain animate-bounce-slow">
                 </div>
             </div>
 
@@ -400,19 +405,41 @@
             </div>
 
             <!-- 祝福消息 -->
-            <div id="message" class="mt-12 text-center hidden">
-                <h2
-                    class="text-[clamp(2rem,4vw,3rem)] font-righteous text-transparent bg-gradient-to-r from-yellow-400 to-accent mb-4 animate-fade-in">
-                    六一快乐！
-                </h2>
-                <p class="text-white/90 text-xl max-w-2xl mx-auto mb-6 animate-fade-in">
-                    愿你永远保持童心，每一天都充满甜蜜与惊喜～
-                </p>
-                <div class="animate-fade-in">
-                    <audio id="greeting-audio" controls loop>
-                        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-                        您的浏览器不支持音频播放。
-                    </audio>
+            <!-- <div id="message" class="mt-12 text-center hidden"> -->
+            <!-- <h2 -->
+            <!-- class="text-[clamp(2rem,4vw,3rem)] font-righteous text-transparent bg-gradient-to-r from-yellow-400 to-accent mb-4 animate-fade-in"> -->
+            <!-- 六一快乐！ -->
+            <!-- </h2> -->
+            <!-- <p class="text-white/90 text-xl max-w-2xl mx-auto mb-6 animate-fade-in"> -->
+            <!-- 愿你永远保持童心，每一天都充满甜蜜与惊喜～ -->
+            <!-- </p> -->
+            <!-- <div class="animate-fade-in"> -->
+            <!-- <audio id="greeting-audio" controls loop> -->
+            <!-- <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg"> -->
+            <!-- 您的浏览器不支持音频播放。 -->
+            <!-- </audio> -->
+            <!-- </div> -->
+            <!-- </div> -->
+
+            <!-- 音乐播放器 -->
+            <div class="music-player mt-8" style="display: none;">
+                <div class="music-info text-center mb-4">
+                    <h3 id="music-title" class="text-lg font-bold text-white">音乐名称</h3>
+                </div>
+                <div class="controls flex items-center justify-center space-x-4">
+                    <button id="prev-btn" class="bg-primary text-white p-2 rounded-full shadow-md hover:bg-primary/90">
+                        <i class="fa fa-step-backward"></i>
+                    </button>
+                    <button id="play-pause-btn"
+                        class="bg-secondary text-white p-2 rounded-full shadow-md hover:bg-secondary/90">
+                        <i class="fa fa-play"></i>
+                    </button>
+                    <button id="next-btn" class="bg-primary text-white p-2 rounded-full shadow-md hover:bg-primary/90">
+                        <i class="fa fa-step-forward"></i>
+                    </button>
+                </div>
+                <div class="progress-bar mt-4">
+                    <input id="progress" type="range" min="0" max="100" value="0" class="w-full">
                 </div>
             </div>
         </div>
@@ -480,7 +507,7 @@
         const openBtn = document.getElementById('open-btn'); // 打开按钮元素
         const message = document.getElementById('message'); // 祝福消息元素
         const fireworksCanvas = document.getElementById('fireworks-canvas'); // 烟花画布元素
-        const greetingAudio = document.getElementById('greeting-audio'); // 祝福音频元素
+        // const greetingAudio = document.getElementById('greeting-audio'); // 祝福音频元素
 
         // 下落物品数组
         let fallingItems = []; // 存储下落物品的数组
@@ -705,18 +732,33 @@
                 }
             }, 1000); // 延迟1000ms开始创建烟花
 
-            // // 显示角色
-            // setTimeout(() => {
-            //     character.style.opacity = '1'; // 设置角色透明度为1
-            //     character.style.animation = 'scaleIn 0.8s ease-out forwards'; // 播放角色出现动画
-            // }, 3000); // 延迟3000ms显示角色
+            // 显示角色
+            setTimeout(() => {
+                character.style.opacity = '1'; // 设置角色透明度为1
+                character.style.animation = 'scaleIn 0.8s ease-out forwards'; // 播放角色出现动画
+            }, 3000); // 延迟3000ms显示角色
 
             // 显示消息
+            // setTimeout(() => {
+            //     // message.classList.remove('hidden'); // 显示祝福消息
+            //     // 播放祝福音频
+            //     greetingAudio.play().catch(e => console.log("音频播放需要用户交互:", e)); // 播放音频并捕获错误
+            // }, 4000); // 延迟4000ms显示消息
+
+            // 替换按钮为音乐播放器
+            openBtn.style.transition = 'opacity 1s';
+            openBtn.style.opacity = '0';
             setTimeout(() => {
-                // message.classList.remove('hidden'); // 显示祝福消息
-                // 播放祝福音频
-                greetingAudio.play().catch(e => console.log("音频播放需要用户交互:", e)); // 播放音频并捕获错误
-            }, 4000); // 延迟4000ms显示消息
+                openBtn.style.display = 'none';
+                const musicPlayer = document.querySelector('.music-player');
+                musicPlayer.style.display = 'block';
+                musicPlayer.style.opacity = '0';
+                musicPlayer.style.transition = 'opacity 1s';
+                setTimeout(() => {
+                    musicPlayer.style.opacity = '1';
+                }, 10);
+                playPauseMusic();
+            }, 1000);
 
             // 开始动画循环
             if (!animationFrameId) {
@@ -739,6 +781,80 @@
 
             createFirework(e.clientX, e.clientY); // 在点击位置创建烟花
         });
+
+        // 音乐播放器
+        const musicList = [
+            { name: "Melt Inside My Pocket", path: "musics/meltInsideMyPocket.mp3" },
+            { name: "poppop", path: "musics/poppop.mp3" },
+            { name: "3 Minutes", path: "musics/3minutes.mp3" },
+            { name: "CHOO CHOO", path: "musics/choochoo.mp3" },
+            { name: "Dunk Shot", path: "musics/DunkShot.mp3" },
+            { name: "Hands Up", path: "musics/hands_up.mp3" },
+            { name: "Make You Shine", path: "musics/makeyoushine.mp3" },
+            { name: "NASA", path: "musics/NASA.mp3" },
+            { name: "On & On", path: "musics/on_and_on.mp3" },
+            { name: "1000", path: "musics/one000.mp3" },
+            { name: "Silly Dance", path: "musics/sillyDance.mp3" },
+            { name: "Songbird", path: "musics/songbird.mp3" },
+            { name: "Steady", path: "musics/steady.mp3" },
+            { name: "Supercute", path: "musics/supercute.mp3" },
+            { name: "Tears Are Falling", path: "musics/tearsAreFalling.mp3" },
+            { name: "We Go!", path: "musics/wego.mp3" },
+            { name: "WISH", path: "musics/wish.mp3" },
+            { name: "假如你4点钟出现", path: "musics/假如你4点钟出现.mp3" }
+        ];
+
+        let currentMusicIndex = 0;
+        const audio = new Audio(musicList[currentMusicIndex].path);
+        const musicTitle = document.getElementById('music-title');
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const progress = document.getElementById('progress');
+
+        function loadMusic(index) {
+            audio.src = musicList[index].path;
+            musicTitle.textContent = musicList[index].name;
+            progress.value = 0;
+        }
+
+        function playPauseMusic() {
+            if (audio.paused) {
+                audio.play();
+                playPauseBtn.innerHTML = '<i class="fa fa-pause"></i>';
+            } else {
+                audio.pause();
+                playPauseBtn.innerHTML = '<i class="fa fa-play"></i>';
+            }
+        }
+
+        function prevMusic() {
+            currentMusicIndex = (currentMusicIndex - 1 + musicList.length) % musicList.length;
+            loadMusic(currentMusicIndex);
+            audio.play();
+            playPauseBtn.innerHTML = '<i class="fa fa-pause"></i>';
+        }
+
+        function nextMusic() {
+            currentMusicIndex = (currentMusicIndex + 1) % musicList.length;
+            loadMusic(currentMusicIndex);
+            audio.play();
+            playPauseBtn.innerHTML = '<i class="fa fa-pause"></i>';
+        }
+
+        audio.addEventListener('timeupdate', () => {
+            progress.value = (audio.currentTime / audio.duration) * 100;
+        });
+
+        progress.addEventListener('input', () => {
+            audio.currentTime = (progress.value / 100) * audio.duration;
+        });
+
+        playPauseBtn.addEventListener('click', playPauseMusic);
+        prevBtn.addEventListener('click', prevMusic);
+        nextBtn.addEventListener('click', nextMusic);
+
+        loadMusic(currentMusicIndex);
     </script>
 </body>
 
