@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人格扑克游戏</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container my-5">
+        <div class="card shadow-lg">
+            <div class="card-header text-center bg-dark text-white">
+                <h1>人格扑克分析</h1>
+            </div>
+            <div class="card-body p-4">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <h5 class="mb-3">输入您的五张牌</h5>
+                        <p class="text-muted">请输入5个卡牌代码 (例如: c5, h10, sK, dA)。</p>
+                        <div id="input-area">
+                            <div class="input-group mb-2">
+                                <span class="input-group-text">牌 1</span>
+                                <input type="text" class="form-control card-input" placeholder="例如: sA">
+                            </div>
+                            <div class="input-group mb-2">
+                                <span class="input-group-text">牌 2</span>
+                                <input type="text" class="form-control card-input" placeholder="例如: hK">
+                            </div>
+                            <div class="input-group mb-2">
+                                <span class="input-group-text">牌 3</span>
+                                <input type="text" class="form-control card-input" placeholder="例如: dQ">
+                            </div>
+                            <div class="input-group mb-2">
+                                <span class="input-group-text">牌 4</span>
+                                <input type="text" class="form-control card-input" placeholder="例如: cJ">
+                            </div>
+                            <div class="input-group mb-2">
+                                <span class="input-group-text">牌 5</span>
+                                <input type="text" class="form-control card-input" placeholder="例如: s10">
+                            </div>
+                        </div>
+                        <button id="submit-btn" class="btn btn-primary w-100 mt-3">分析我的手牌</button>
+                        <div id="input-error" class="alert alert-danger mt-3 d-none"></div>
+                    </div>
+                    <div class="col-lg-8">
+                        <h5 class="mb-3">您的手牌</h5>
+                        <div id="card-display-area" class="d-flex justify-content-center align-items-center flex-wrap">
+                            <!-- Cards will be rendered here -->
+                        </div>
+                        <hr class="my-4">
+                        <div id="results-area" class="d-none">
+                            <h2 class="text-center mb-4">分析结果</h2>
+                            <!-- Results will be injected here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="analysis_data_cn.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

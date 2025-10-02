@@ -1,0 +1,153 @@
+/* General Styles */
+body {
+    background-color: #e9ecef;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Card Styles */
+.playing-card {
+    width: 90px;
+    height: 140px;
+    border: 1px solid #adb5bd;
+    border-radius: 8px;
+    padding: 5px;
+    margin: 5px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* 改为 center 使内容垂直居中 */
+    align-items: center;
+    /* 水平居中 */
+    position: relative;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.playing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.playing-card.red {
+    color: #dc3545;
+}
+
+.playing-card.black {
+    color: #212529;
+}
+
+.playing-card .suit {
+    font-size: 24px;
+    /* 稍微减小一点，为文字留出空间 */
+    text-align: center;
+    line-height: 1;
+    position: absolute;
+    /* 绝对定位，使其不影响文字布局 */
+    opacity: 0.1;
+    /* 设置透明度，作为背景 */
+}
+
+.playing-card .top-left,
+.playing-card .bottom-right {
+    position: absolute;
+    line-height: 1;
+    font-size: 16px;
+}
+
+.playing-card .top-left {
+    top: 8px;
+    left: 8px;
+}
+
+.playing-card .bottom-right {
+    bottom: 8px;
+    right: 8px;
+    transform: rotate(180deg);
+}
+
+.playing-card .trait {
+    font-size: 12px;
+    /* 适当调整字体大小 */
+    text-align: center;
+    font-weight: bold;
+    /* 加粗 */
+    color: #343a40;
+    /* 使用更深的颜色以提高可读性 */
+    padding: 0 5px;
+    /* 左右留出一些边距 */
+    position: relative;
+    /* 确保文字在花色符号上层 */
+    z-index: 1;
+}
+
+.playing-card.back {
+    background-image: linear-gradient(45deg, #6c757d 25%, #495057 25%, #495057 50%, #6c757d 50%, #6c757d 75%, #495057 75%, #495057 100%);
+    background-size: 56.57px 56.57px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    text-align: center;
+}
+
+.playing-card.selectable:hover {
+    border-color: #0d6efd;
+    box-shadow: 0 0 10px rgba(13, 110, 253, 0.5);
+}
+
+.playing-card.selected {
+    border: 2px solid #0d6efd;
+    transform: translateY(-10px);
+}
+
+
+/* Game Layout */
+#game-screen {
+    max-width: 100%;
+}
+
+#players-area .player-card {
+    transition: background-color 0.3s;
+}
+
+#players-area .player-card.active {
+    background-color: #d6eaff;
+    border: 1px solid #0d6efd;
+}
+
+.player-hand {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-height: 150px;
+}
+
+#deck {
+    margin: 0 auto;
+}
+
+#drawn-card-display {
+    display: flex;
+    justify-content: center;
+}
+
+#game-log {
+    height: 300px;
+    overflow-y: auto;
+    font-size: 0.9rem;
+}
+
+#game-log p {
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+#game-log p:last-child {
+    border-bottom: none;
+}

@@ -1,0 +1,96 @@
+/* style.css */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.card-header h1 {
+    font-weight: 300;
+}
+
+.playing-card {
+    width: 100px;
+    height: 150px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    background-color: white;
+    box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* 改为 center 使内容垂直居中 */
+    align-items: center;
+    /* 水平居中 */
+    position: relative;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.playing-card .suit {
+    font-size: 30px;
+    /* 稍微减小一点，为文字留出空间 */
+    text-align: center;
+    line-height: 1;
+    position: absolute;
+    /* 绝对定位，使其不影响文字布局 */
+    opacity: 0.1;
+    /* 设置透明度，作为背景 */
+}
+
+.playing-card.red {
+    color: red;
+}
+
+.playing-card.black {
+    color: black;
+}
+
+.top-left,
+.bottom-right {
+    position: absolute;
+    line-height: 1;
+}
+
+.top-left {
+    top: 10px;
+    left: 10px;
+}
+
+.bottom-right {
+    bottom: 10px;
+    right: 10px;
+    transform: rotate(180deg);
+}
+
+#results-area .result-section {
+    background-color: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+#results-area h3 {
+    border-bottom: 2px solid #0d6efd;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    color: #343a40;
+}
+
+.playing-card .trait {
+    font-size: 12px;
+    /* 适当调整字体大小 */
+    text-align: center;
+    font-weight: bold;
+    /* 加粗 */
+    color: #343a40;
+    /* 使用更深的颜色以提高可读性 */
+    padding: 0 5px;
+    /* 左右留出一些边距 */
+    position: relative;
+    /* 确保文字在花色符号上层 */
+    z-index: 1;
+}
